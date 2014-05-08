@@ -1,15 +1,22 @@
 from flask import render_template
 from flaskr import app
-from flask import Flask , redirect , url_for ,request
+from flaskr.database import db
+from flask import Flask , redirect , url_for ,request , send_from_directory
 from flaskr.model import Entry
+from werkzeug import secure_filename
+import os
 
 
 
 
 # This is the path to the upload directory
-app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['UPLOAD_FOLDER'] = '/tmp/'
 # These are the extension that we are accepting to be uploaded
 app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif'])
+
+
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 
 @app.route('/',methods=['GET'])
@@ -20,9 +27,18 @@ def index():
 
 @app.route('/upload',methods=['POST'])
 def upload():
-	request.files['files']
-  
+	file = request.files['file']
+	if file and allowed_file(file.filename):
+	  filename = secure_filename(file.filename)
+	  file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+	entry=Entry(request.values['title'],request.values['content'],file.filename)
+	db.session.add(entry)
+	db.session.commit()  
 	return redirect(url_for('index'))
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+  return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
 
 @app.route('/new',methods=['GET'])

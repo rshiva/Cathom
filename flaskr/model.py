@@ -12,13 +12,15 @@ class Entry(db.Model):
   id = db.Column(db.Integer,Sequence('entries_id_seq'),primary_key=True)
   title = db.Column(db.Text)
   content = db.Column(db.Text)
+  photo_name = db.Column(db.String)
   created_at = db.Column(db.DateTime)
   updated_at = db.Column(db.DateTime)
 
 
-  def __init__(self,title,content):
+  def __init__(self,title,content,photo_name):
     self.title = title
     self.content = content
+    self.photo_name = photo_name
     self.created_at=datetime.datetime.utcnow()
     self.updated_at=datetime.datetime.utcnow()
 
