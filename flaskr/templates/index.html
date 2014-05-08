@@ -1,16 +1,23 @@
 {% extends "layout.html" %}
 {% block body %}
 <h2>We are the Knight's worst nightmare</h2>
+<style type="text/css">
+	.entries li {float:left; margin:20px; list-style: none ; width: 350px; height: auto}
+	h1, h2 {text-align: center;}
+	ul { text-align: center; margin: 0 auto; width: 1200px}
+</style>
   <ul class=entries>
   {% for entry in entries %}
-  <li><h2>{{ entry.title }}</h2>
+  <li><h3>{{ entry.title }}</h3>
   </br>
   </br>
   <img src="{{ url_for('static', filename = '/uploads/'+entry.photo_name ) }}" width="350" height="250">
   </br>
-  <h2>Special Powers</h2> </br>
+  <h3>Special Powers</h3> </br>
   {{ entry.content }}
   {% endfor %}
   </ul>
   
 {% endblock %}
+
+Add New 
