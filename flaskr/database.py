@@ -1,17 +1,14 @@
 import os
-from flask import Flask, request, session, g, redirect, url_for, abort, \
-             render_template, flash
+from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import Column, Integer, String , Text , Boolean , DateTime, MetaData, Table ,Sequence,ForeignKey 
 
-
+#Base = declarative_base()
 app=Flask(__name__)
-db_name="postgresql+psycopg2://admin:desidime123@localhost:5432/test_table"
-engine = create_engine(db_name,echo=True) 
-Session = sessionmaker(autocommit=False ,bind=engine)
-connection = engine.connect()
+app.config['SQLALCHEMY_DATABASE_URI']='postgresql+psycopg2://admin:desidime123@localhost:5432/test_table'
+db = SQLAlchemy(app)
 metadata = MetaData()
 
 
@@ -24,4 +21,4 @@ entries = Table('entries', metadata,
     extend_existing=True
     )
 
-metadata.create_all(engine) 
+db.create_all()

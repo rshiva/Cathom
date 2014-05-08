@@ -1,4 +1,9 @@
 {% extends "layout.html" %}
 {% block body %}
-<h2>Extend the layout</h2>
+<h2>We are the Knight's worst nightmare</h2>
+  <ul class=entries>
+  {% for entry in entries %}
+  <li><h2>{{ entry.title }}</h2>{{ entry.content }}
+  {% endfor %}
+  </ul>
 {% endblock %}
