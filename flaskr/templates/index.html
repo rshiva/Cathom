@@ -1,11 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
 <h2>We are the Knight's worst nightmare</h2>
-<style type="text/css">
-	.entries li {float:left; margin:20px; list-style: none ; width: 350px; height: auto}
-	h1, h2 {text-align: center;}
-	ul { text-align: center; margin: 0 auto; width: 1200px}
-</style>
   <ul class=entries>
   {% for entry in entries %}
   <li><h3>{{ entry.title }}</h3>

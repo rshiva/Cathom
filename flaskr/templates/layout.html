@@ -1,5 +1,6 @@
 <html>
 <div class=page>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
   <h1>Welcome to Cathom</h1>
   {% for message in get_flashed_messages() %}
     <div class=flash>{{ message }}</div>
