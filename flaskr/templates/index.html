@@ -10,6 +10,8 @@
   </br>
   <h3>Special Powers</h3> </br>
   {{ entry.content }}
+</br>
+<input type="button" value="Destroy" id= "destroy_{{entry.id}}" data-source= "{{entry.id}}" class="destroy" ></input>
   {% endfor %}
   </ul>  
   <a href="{{ url_for('new') }}">New Villian</a>
